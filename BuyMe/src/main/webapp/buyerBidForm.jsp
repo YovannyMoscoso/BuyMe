@@ -7,7 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+
+<%
+int deviceID = -1;
+if (request.getParameter("deviceid") != null) {
+	deviceID = Integer.parseInt(request.getParameter("deviceid"));
+}
+%>
+<title><%="Device: " + deviceID%></title>
 </head>
 <body>
 
@@ -21,11 +28,16 @@
 	//Create a SQL statement
 	Statement stmt = con.createStatement();
 	//out.println("testing");
-	int deviceID = -1;
-	if (request.getParameter("deviceid") != null) {
-		deviceID = Integer.parseInt(request.getParameter("deviceid"));
-	}
 	%>
+
+	<form action="buyerBidForm.jsp" method="post">
+		Place Bid: <input name="bid" type="text" /> <br />
+		Automatic BiddingSecret Upper Limit (Optional): <input name="upperLimit" type="text" /><br /> 
+		Automatic Bidding Increment (Requires Upper Limit): <input name="increment" type="text" /> <br />
+ 		<input name="deviceid" type="hidden" value=75/> <br />
+		<button type="submit">Submit</button>
+	</form>
+
 	<b>Device:</b>
 	<table border="2">
 		<%
@@ -70,12 +82,12 @@
 			<td><%=bidItem.getInt("currentbid")%></td>
 			<td><%=bidItem.getDate("endingdate")%></td>
 		</tr>
-		<%
+		<% 
 		found = true;
 		}
 		%>
 
-		<%
+		<% 
 		queryDevice = "SELECT * FROM laptop WHERE laptop.deviceid=" + deviceID;
 		bidItem = stmt.executeQuery(queryDevice);
 		if (!found && bidItem.isBeforeFirst()) { //if item was found in laptop
@@ -165,7 +177,7 @@
 			<td><%=bidItem.getDate("endingdate")%></td>
 		</tr>
 
-		<%
+		<% 
 		found = true;
 		}
 		%>
@@ -178,10 +190,15 @@
 		if (found) {
 			//String[] itemHistory = {"75","80","85","90"};
 			for (String his : itemHistory) {
-				out.print("<tr>");
-				out.print("<td>" + his + "</td>");
-				out.print("</tr>");
-			}
+		%>
+		<tr>
+			<td><%=his%></td>
+		</tr>
+		<%
+		/* out.print("<tr>");
+		out.print("<td>" + his + "</td>");
+		out.print("</tr>"); */
+		}
 
 		}
 		%>
