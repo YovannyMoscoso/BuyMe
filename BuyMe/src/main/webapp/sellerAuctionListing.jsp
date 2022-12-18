@@ -16,6 +16,21 @@
 	<button type = "submit"> Bid </button>
 </form>
 
+ <form action="search.jsp" class="form1">
+    <input type="text" name="search" placeholder="Search for anything &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>&nbsp;
+    <button type="submit">Search</button>
+</form>
+
+<br></br>
+<form action = "alertItem.jsp" method = "post">
+	 Want to be notified if an item is available? Type in the item: <input name = "alertItem" type = "text" /> <br/>
+	 Email: <input name = "email" type = "text" /> <br/>
+	<button type = "submit"> Submit </button>
+</form>
+
+<br></br>
+<a href="browseQuestions.jsp">Browse or search questions.</a> 
+
 <br></br>
 
 <b>Tablets</b>
