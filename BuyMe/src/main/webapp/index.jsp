@@ -19,7 +19,7 @@
     </head>
     <body>
         <header>
-            Hi! <a href="login.jsp">Sign in</a> or <a href="registration.jsp" onsubmit="">register</a>
+            Hi! <a href="loginFormHTML.jsp">Sign in</a> or <a href="makeAccountHTML.jsp" onsubmit="">register</a>
             <hr><!-- comment -->
         </header>
         <h1>Welcome to Buy Me!</h1>
