@@ -23,8 +23,6 @@
             <tr align="center">
                 <th>User</th>
                 <th>Bid</th>
-                <th>Upper limit</th>
-                <th>Bid Increment </th>
                 <th>Bid Date</th>
                 <th>Device Id</th>
             </tr>
@@ -32,8 +30,6 @@
             <tr align="center">
                 <td><%=rs.getString("user")%></td>
                 <td><%=rs.getInt("bid")%></td>
-                <td><%=rs.getInt("upper_limit")%></td>
-                <td><%=rs.getInt("increment")%></td>
                 <td><%=rs.getDate("bid_date")%></td>
                 <td><%=rs.getString("device_id")%></td>
             </tr>

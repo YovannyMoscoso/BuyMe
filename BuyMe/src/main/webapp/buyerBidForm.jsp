@@ -25,7 +25,7 @@
 
     <%
         //Get the database connection
-
+		ApplicationDB db = new ApplicationDB();
         Connection con = db.getConnection();
         //Create a SQL statement
         Statement stmt = con.createStatement();
@@ -44,14 +44,12 @@
     <table class="table table-striped" style="border:none; margin-left: auto; margin-right: auto; width: 95%">
         <%
             Boolean found = false;
-            String itemHistory[] = {""};
             //Check if device was found in laptop
             String queryDevice = "SELECT * FROM tablet WHERE tablet.deviceid=" + deviceID;
             ResultSet bidItem = stmt.executeQuery(queryDevice);
             if (!found && bidItem.isBeforeFirst()) { //if item was found in tablet
                 bidItem.next();
                 //out.println("Found in Tablet");
-                itemHistory = bidItem.getString("history").substring(1).split("\\$");
         %>
         <tr align="center">
             <td>Seller</td>
@@ -95,7 +93,6 @@
             if (!found && bidItem.isBeforeFirst()) { //if item was found in laptop
                 bidItem.next();
                 //out.println("Found in laptop");
-                itemHistory = bidItem.getString("history").split("$");
         %>
         <tr align="center">
             <td>Seller</td>
@@ -143,7 +140,6 @@
             if (!found && bidItem.isBeforeFirst()) { //if item was found in phone
                 bidItem.next();
                 //out.println("Found in phone");
-                itemHistory = bidItem.getString("history").split("$");
         %>
         <tr align="center">
             <td>Seller</td>
