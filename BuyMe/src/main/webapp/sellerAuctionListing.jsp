@@ -1,14 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <!--Import some libraries that have classes that we need -->
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <script src="https://kit.fontawesome.com/f90d3bf50d.js" crossorigin="anonymous"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
 </form>
 
  <form action="search.jsp" class="form1">
-    <input type="text" name="search" placeholder="Search for anything &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>&nbsp;
+    <input type="text" name="search" placeholder="Search for anything &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>;
     <button type="submit">Search</button>
 </form>
 
@@ -31,7 +31,7 @@
 </form>
 
 <br></br>
-<a href="browseQuestions.jsp">Browse or search questions.</a> 
+<a href="forum.jsp">Browse or search questions.</a> 
 
 <br></br>
 
@@ -54,13 +54,11 @@
 </tr>
 
 <% 
-
 		String queryTablet ="select * from tablet";
 		
 		//Get the database connection
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
-
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(queryTablet);
@@ -69,7 +67,6 @@
 		
 while(rs.next())
 {
-
 %>
 	
     <tr>
@@ -86,18 +83,26 @@ while(rs.next())
     <td><%=rs.getInt("bidincrement") %></td>
      <td><%=rs.getInt("currentbid") %></td>
     <td><%=rs.getDate("endingdate") %></td>
+    
+    <c:choose>
+                <c:when test="${sessionScope.account_type == 'Customer Service Representative' or sessionScope.account_type == 'Administrator'}">
+                    <td style="background-color: red">
+                        <form>
+                            <button name="delete_auction_id" formaction="remove_tablet.jsp" value=<%=rs.getString("deviceid") %>>Delete Auction</button>
+                        </form>
+                    </td>
+                   
+                </c:when>
+            </c:choose>
 	</tr>
 	
         <%
-
 }
 %>
     </table>
  
 <% // now let's do it for laptop %>
-
 <br></br>
-
 <b>Laptops</b>
 <table border="2">
 <tr>
@@ -117,14 +122,12 @@ while(rs.next())
 <td>Current Bid</td>
 <td>End Date</td>
 </tr>
-
 <% 
 		String queryLaptop = "select * from laptop";
 		ResultSet rs2 = stmt.executeQuery(queryLaptop);
 		
 while(rs2.next())
 {
-
 %>
 	
     <tr>
@@ -143,19 +146,27 @@ while(rs2.next())
     <td><%=rs2.getInt("bidincrement") %></td>
      <td><%=rs2.getInt("currentbid") %></td>
     <td><%=rs2.getDate("endingdate") %></td>
+    
+    <c:choose>
+                <c:when test="${sessionScope.account_type == 'Customer Service Representative' or sessionScope.account_type == 'Administrator'}">
+                    <td style="background-color: red">
+                        <form>
+                            <button name="delete_auction_id" formaction="remove_laptop.jsp" value=<%=rs2.getString("deviceid") %>>Delete Auction</button>
+                        </form>
+                    </td>
+                    
+                </c:when>
+            </c:choose>
 	</tr>
 	
         <%
-
 }
 %>
     </table>
     
     
 <% //now we do for phones %>
-
 <br></br>
-
 <b>Phones</b>
 <table border="2">
 <tr>
@@ -173,15 +184,15 @@ while(rs2.next())
 <td>Bid Increment</td>
 <td>Current Bid</td>
 <td>End Date</td>
-</tr>
 
+
+</tr>
 <% 
 		String queryPhone = "select * from phone";
 		ResultSet rs3 = stmt.executeQuery(queryPhone);
 		
 while(rs3.next())
 {
-
 %>
 	
     <tr>
@@ -199,18 +210,27 @@ while(rs3.next())
     <td><%=rs3.getInt("bidincrement") %></td>
      <td><%=rs3.getInt("currentbid") %></td>
     <td><%=rs3.getDate("endingdate") %></td>
+    
+    <c:choose>
+                <c:when test="${sessionScope.account_type == 'Customer Service Representative' or sessionScope.account_type == 'Administrator'}">
+                    <td style="background-color: red">
+                        <form>
+                            <button name="delete_auction_id" formaction="remove_phone.jsp" value=<%=rs3.getString("deviceid") %>>Delete Auction</button>
+                        </form>
+                    </td>
+                    
+                </c:when>
+            </c:choose>
 	</tr>
 	
         <%
-
 }
 %>
     </table>
+ 
+ 
 
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
 </body>
