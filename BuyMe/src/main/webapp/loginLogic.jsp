@@ -52,7 +52,7 @@ String password = request.getParameter("password");
 					
 					session.setAttribute("username", username);
 					session.setAttribute("account_type", "End_user");
-					response.sendRedirect("CustRepPage.jsp"); //redirect to the loggedIn page
+					response.sendRedirect("loggedIn.jsp"); //redirect to the loggedIn page
 						
 				} else //if the username doesn't exist, have the user type in the correct user and password or make an account
 				{
