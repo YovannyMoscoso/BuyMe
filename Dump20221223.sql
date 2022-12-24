@@ -18,6 +18,35 @@ USE `buyme`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bid`
+--
+
+DROP TABLE IF EXISTS `bid`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `bid` (
+  `bid_id` int NOT NULL AUTO_INCREMENT,
+  `bid` int DEFAULT '0',
+  `upper_limit` int DEFAULT '0',
+  `increment` int DEFAULT '0',
+  `bid_date` date DEFAULT NULL,
+  `device_id` varchar(50) DEFAULT NULL,
+  `user` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`bid_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bid`
+--
+
+LOCK TABLES `bid` WRITE;
+/*!40000 ALTER TABLE `bid` DISABLE KEYS */;
+INSERT INTO `bid` VALUES (1,120,200,1,'2022-12-20','75','yovanny'),(2,150,300,2,'2022-12-20','75','yovanny'),(3,250,400,3,'2022-12-20','75','yovanny'),(6,220,0,0,'2022-12-20','6578','yovanny'),(7,260,500,4,'2022-12-20','75','hyeon'),(10,100,0,0,'2022-12-20','670','hyeon'),(11,110,0,0,'2022-12-20','670','yovanny'),(12,270,600,5,'2022-12-21','75','adrian'),(25,290,700,6,'2022-12-21','75','adrian'),(26,400,800,7,'2022-12-21','75','adrian'),(30,420,900,8,'2022-12-22','75','hyeon'),(31,210,0,0,'2022-12-22','357','hyeon'),(32,220,0,0,'2022-12-22','357','hyeon'),(33,230,0,0,'2022-12-22','357','hyeon'),(34,210,0,0,'2022-12-22','875','hyeon'),(35,450,1000,9,'2022-12-22','75','hyeon'),(36,460,1200,10,'2022-12-22','75','hyeon'),(37,460,2400,20,'2022-12-22','75','hyeon');
+/*!40000 ALTER TABLE `bid` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `itemalert`
 --
 
@@ -64,7 +93,6 @@ CREATE TABLE `laptop` (
   `bidincrement` int NOT NULL,
   `endingdate` datetime NOT NULL,
   `currentbid` int DEFAULT '0',
-  `history` varchar(65535) NOT NULL,
   PRIMARY KEY (`deviceid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -75,7 +103,7 @@ CREATE TABLE `laptop` (
 
 LOCK TABLES `laptop` WRITE;
 /*!40000 ALTER TABLE `laptop` DISABLE KEYS */;
-INSERT INTO `laptop` VALUES ('bryan','dell','windows','i7','9x11','idk','idk','idk','1790 joules','357','89',200,200,10,'2022-12-22 00:00:00',0,''),('wa','dell','windows','i7','9x11','idk','idk','idk','idk','670','89',500,90,20,'2022-12-22 00:00:00',0,''),('bryan','dell','windows','i7','9x11','idk','idk','idk','idk','789','234',900,200,20,'2022-12-14 00:00:00',0,'');
+INSERT INTO `laptop` VALUES ('bryan','dell','windows','i7','9x11','idk','idk','idk','1790 joules','357','89',200,200,10,'2022-12-22 00:00:00',230),('wa','dell','windows','i7','9x11','idk','idk','idk','idk','670','89',500,90,20,'2022-12-22 00:00:00',0),('bryan','dell','windows','i7','9x11','idk','idk','idk','idk','789','234',900,200,20,'2022-12-14 00:00:00',0);
 /*!40000 ALTER TABLE `laptop` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +130,6 @@ CREATE TABLE `phone` (
   `bidincrement` int NOT NULL,
   `endingdate` datetime NOT NULL,
   `currentbid` int DEFAULT '0',
-  `history` varchar(65535) NOT NULL,
   PRIMARY KEY (`deviceid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -113,7 +140,7 @@ CREATE TABLE `phone` (
 
 LOCK TABLES `phone` WRITE;
 /*!40000 ALTER TABLE `phone` DISABLE KEYS */;
-INSERT INTO `phone` VALUES ('bryan','lg optimus exceed 2','android','a9','9x11','idk','64 gb','1790 joules','6578','453433',900,200,10,'2022-12-22 00:00:00',0,''),('hyeon','iphone 6s','ios','a9','9x11','idk','64 gb','80','6759','9853',900,300,20,'2022-12-22 00:00:00',0,''),('hyeon','iphone 11','ios','a12','9x11','idk','64 gb','1790 joules','875','7688',900,200,10,'2022-12-22 00:00:00',0,''),('hyeon','nexus','windows','i7','9x11','idk','idk','1790 joules','890','899',900,300,20,'2022-12-22 00:00:00',0,''),('bryan','iphone 5','ios','a9','9x11','idk','64 gb','idk','8943','48593',200,50,20,'2022-12-22 00:00:00',0,''),('hyeon','iphone 6s','ios','i7','9x11','idk','64 gb','1790 joules','89732','83472',600,200,10,'2022-12-14 00:00:00',0,'');
+INSERT INTO `phone` VALUES ('bryan','lg optimus exceed 2','android','a9','9x11','idk','64 gb','1790 joules','6578','453433',900,200,10,'2022-12-22 00:00:00',0),('hyeon','iphone 6s','ios','a9','9x11','idk','64 gb','80','6759','9853',900,300,20,'2022-12-22 00:00:00',0),('hyeon','iphone 11','ios','a12','9x11','idk','64 gb','1790 joules','875','7688',900,200,10,'2022-12-22 00:00:00',210),('hyeon','nexus','windows','i7','9x11','idk','idk','1790 joules','890','899',900,300,20,'2022-12-22 00:00:00',0),('bryan','iphone 5','ios','a9','9x11','idk','64 gb','idk','8943','48593',200,50,20,'2022-12-22 00:00:00',0),('hyeon','iphone 6s','ios','i7','9x11','idk','64 gb','1790 joules','89732','83472',600,200,10,'2022-12-14 00:00:00',0);
 /*!40000 ALTER TABLE `phone` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +190,6 @@ CREATE TABLE `tablet` (
   `bidincrement` int NOT NULL,
   `endingdate` datetime NOT NULL,
   `currentbid` int DEFAULT '0',
-  `history` varchar(65535) NOT NULL,
   PRIMARY KEY (`deviceid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -174,7 +200,7 @@ CREATE TABLE `tablet` (
 
 LOCK TABLES `tablet` WRITE;
 /*!40000 ALTER TABLE `tablet` DISABLE KEYS */;
-INSERT INTO `tablet` VALUES ('hyeon','nexus 7','windows','i7','9x11','idk','128 gb','1790 joules','75',200,100,5,'2022-12-22 00:00:00',0,'$80$85$90$95'),('hyeon','nexus 7','android','i7','9x11','idk','128 gb','idk','879',900,300,20,'2022-12-14 00:00:00',0,'');
+INSERT INTO `tablet` VALUES ('hyeon','nexus 7','windows','i7','9x11','idk','128 gb','1790 joules','75',200,100,5,'2022-12-22 00:00:00',460),('hyeon','nexus 7','android','i7','9x11','idk','128 gb','idk','879',900,300,20,'2022-12-14 00:00:00',0);
 /*!40000 ALTER TABLE `tablet` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -198,7 +224,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('hyeon','pass');
+INSERT INTO `users` VALUES ('adrian','adrian'),('hyeon','pass'),('yovanny','password');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -211,4 +237,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-17 14:14:42
+-- Dump completed on 2022-12-23 21:14:23
