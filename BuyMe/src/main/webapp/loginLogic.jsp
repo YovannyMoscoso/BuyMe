@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="com.cs336.pkg.*"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -17,29 +19,52 @@
 <%
 String username = request.getParameter("username");
 String password = request.getParameter("password");
-
 //Get the database connection
 		ApplicationDB db = new ApplicationDB();	
 		Connection con = db.getConnection();
-
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
 		
 		ResultSet rs;
-		rs = stmt.executeQuery("select * from users where username = '" + username + "' and password = '" + password + "'");
-		if(rs.next()) //if user and password exists
-		{
-			
+		if (username.equals("admin")) {
+			rs = stmt.executeQuery("select * from admin where username = '" + username + "' and password = '" + password + "'");
+			if(rs.next()) {
 				session.setAttribute("username", username);
-				response.sendRedirect("loggedIn.jsp"); //redirect to the loggedIn page
-			
-		}
-		else //if the username doesn't exist, have the user type in the correct user and password or make an account
-		{
-			out.println("Password is incorrect. <a href='loginFormHTML.jsp'> Enter again </a>");
-			out.println("If you don't have an account, make an account here. <a href='makeAccountHTML.jsp'> Register an account. </a>");
-		}
+				session.setAttribute("account_type", "Administrator");
 
+				response.sendRedirect("AdminPage.jsp");
+			}
+		} 
+		else {
+			rs = stmt.executeQuery("select * from customer_rep where username = '" + username + "' and password = '" + password + "'");
+			if(rs.next()) //if user and password exists
+			{
+				
+				session.setAttribute("username", username);
+				session.setAttribute("account_type", "Customer Service Representative");
+
+				response.sendRedirect("CustRepPage.jsp"); //redirect to the loggedIn page
+					
+			} else {
+				rs = stmt.executeQuery("select * from user where username = '" + username + "' and userpw = '" + password + "'");
+				if(rs.next()) //if user and password exists
+				{
+					
+					session.setAttribute("username", username);
+					session.setAttribute("account_type", "End_user");
+					response.sendRedirect("CustRepPage.jsp"); //redirect to the loggedIn page
+						
+				} else //if the username doesn't exist, have the user type in the correct user and password or make an account
+				{
+					out.println("Password is incorrect. <a href='loginFormHTML.jsp'> Enter again </a>");
+					out.println("If you don't have an account, make an account here. <a href='makeAccountHTML.jsp'> Register an account. </a>");
+				}
+
+			}
+			
+
+		}
+		
 %>
 	        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -47,3 +72,4 @@ String password = request.getParameter("password");
 		
 </body>
 </html>
+		
