@@ -54,13 +54,14 @@
 
 		<%
 		String queryTablet = "SELECT * FROM bid JOIN tablet ON bid.device_id = tablet.deviceid WHERE bid.user = " + session.getAttribute("username") + " GROUP BY device_id";
-		out.println(queryTablet);
+		//out.println(queryTablet);
 		//Get the database connection
 		ApplicationDB db = new ApplicationDB();
 		Connection con = db.getConnection();
 
 		//Create a SQL statement
 		Statement stmt = con.createStatement();
+		queryTablet = "SELECT * FROM bid JOIN tablet ON bid.device_id = tablet.deviceid WHERE bid.user = " + session.getAttribute("user") + " GROUP BY device_id";
 		ResultSet rs = stmt.executeQuery(queryTablet);
 
 		while (rs.next()) {
