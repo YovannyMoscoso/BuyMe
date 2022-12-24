@@ -4,7 +4,6 @@
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
 <%@ page import="javax.servlet.http.*,javax.servlet.*" %>
 
-<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -43,31 +42,17 @@ Browse the forums:
 Update a user account:
 <br>
 <br>
-	<form method="post" action="AdminReportPage.jsp">
-	<input type="submit" value="Generate Report">
+	<form method="post" action="updateAccount.jsp">
+	<input type="submit" value="Update account">
 	</form>
 <br>
 
-Delete a user account:
-<br>
-<br>
-	<form method="post" action="AdminReportPage.jsp">
-	<input type="submit" value="Generate Report">
-	</form>
-<br>
 
-Remove a bid:
-<br>
-<br>
-	<form method="post" action="sellerAuctionListing.jsp">
-	<input type="submit" value="Remove bid">
-	</form>
-<br>
 
 Remove an auction:
 <br>
 <br>
-	<form method="post" action="remove_auction.jsp">
+	<form method="post" action="sellerAuctionListing.jsp">
 	<input type="submit" value="Remove auction">
 	</form>
 <br>
